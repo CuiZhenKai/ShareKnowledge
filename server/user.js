@@ -24,6 +24,7 @@ Router.post('/login',(req,res)=>{
             return res.json({code:1,'msg':'用户名或者密码错误'});
         }
         //登录成功之后我们将用户的信息保存到cookie
+        //测试
         res.cookie('userid',doc._id);
         return res.json({code:0,data:doc});
     });
