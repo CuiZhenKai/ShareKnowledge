@@ -11,6 +11,7 @@ export function getRedirectPath(type,avatar){
         //没有头像
         url+='info';
     }
-    console.log(url);
+    // console.log(url);
+    //测试vscode与github联调
     return url;
 }
