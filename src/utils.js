@@ -5,11 +5,12 @@
 export function getRedirectPath(type,avatar){
     //根据用户的信息,用来返回跳转地址
     let url = (type.type==='genius')?'/genius':'/boss';
-    console.log(url);
+    
     //根据是否有头像来判断用户的信息是否完善了
     if(!avatar){
         //没有头像
         url+='info';
     }
+    console.log(url);
     return url;
 }

@@ -4,6 +4,8 @@ import React from 'react';
 import axios from 'axios';
 //导入路由使用的方式
 import {withRouter} from 'react-router-dom';
+import {loadData} from '../../redux/user.redux'
+import {connect} from 'react-redux'
 
 
 class AuthRoute extends React.Component{
@@ -19,6 +21,9 @@ class AuthRoute extends React.Component{
             if(res.status==200){
                 if(res.data.code==0){
                     //有登录信息
+                    // console.log("1");
+                    this.props.loadData(res.data.data);
+                    // console.log(res.data.data);
                 }else{
                     //没有登录,跳转到登录页
                     this.props.history.push('/login');
@@ -38,4 +43,7 @@ class AuthRoute extends React.Component{
     }
 }
 
-export default withRouter(AuthRoute);
+export default withRouter(connect(
+    null,
+    {loadData}
+)(AuthRoute));

@@ -17,6 +17,7 @@ import Login from './container/login/login.js'
 import Register from './container/register/register.js'
 //导入authroute组件
 import AuthRoute from './component/autoroute/autoroute.js'
+import BossInfo from './container/bossinfo/bossinfo.js'
 import reducers from './reducers.js'
 import './config'
 import './index.css'
@@ -37,9 +38,11 @@ ReactDom.render(
                 <div>
                     {/* 这个组件存在的意义在于路由是否存在 */}
                     <AuthRoute></AuthRoute>
-                    <Route path='/boss' component={Boss}></Route>
-                    <Route path='/login' component={Login}></Route>
-                    <Route path='/register' component={Register}></Route>
+                    <Switch>
+                        <Route path='/bossinfo' component={BossInfo}></Route>
+                        <Route path='/login' component={Login}></Route>
+                        <Route path='/register' component={Register}></Route>
+                    </Switch>
                 </div>
             </BrowserRouter>
         </Provider>
