@@ -13,10 +13,12 @@ const User = model.getModel('user');
 const _filter = {'pwd':0,'__v':0};
 
 Router.get('/list',(req,res)=>{
+    //获取地址栏中后面?带的参数
+    const {type} = req.query;
     //清除所有的测试数据
     // User.remove({},(err,doc)=>{});
-    User.find({},(err,doc)=>{
-        return res.json(doc);
+    User.find({type},(err,doc)=>{
+        return res.json({code:0,data:doc});
     })
 });
 //处理boss提交的招聘职位的信息
