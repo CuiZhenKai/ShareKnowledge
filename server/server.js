@@ -11,6 +11,13 @@ const bodyParser = require('body-parser');
 //解析cookie的插件
 const cookieParser = require('cookie-parser');
 const userRouter = require('./user');
+const app = express();
+
+
+//如果想要socket和express相互的关联使用,需要下面这样写
+const server = require('http').Server(app);
+//导入可以在项目中可以实现双方联系的插件
+const io = require('socket.io')(server);
 
 const app = express();
 //使用app.use让程序可以解析cookie
