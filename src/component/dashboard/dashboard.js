@@ -5,19 +5,18 @@ import { NavBar} from 'antd-mobile';
 import {BrowserRouter,Route,Redirect,Switch} from 'react-router-dom';
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../../component/boss/boss';
+import Genius from '../../component/genius/genius';
+import User from '../../component/user/user'
+import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux'
 
-// 几个伪组件,用来测试
-function Genius(){
-    return <h2>牛人首页</h2>
-}
 function Message(){
     return <h2>消息首页</h2>
 }
-function User(){
-    return <h2>关于我</h2>
-}
 class Dashboard extends React.Component{
-    
+    componentDidMount(){
+        this.props.getMsgList();
+        this.props.recvMsg();
+    }
     render(){
         // console.log(this.props);
         //因为我们这是路由组件,所以不用引入withRouter组件
@@ -73,5 +72,6 @@ class Dashboard extends React.Component{
 }
 
 export default connect(
-    state=>state
+    state=>state,
+    {getMsgList,recvMsg}
 )(Dashboard);

@@ -7,23 +7,15 @@ import {connect} from 'react-redux';
 //导入跳转路由所需要的插件
 import {Redirect} from 'react-router-dom';
 import {register} from '../../redux/user.redux';
+import imoocForm from '../../component/imoocForm/imooc-form'
 
 class Register extends React.Component{
     constructor(props){
         super(props);
-        // this.register = this.register.bind(this);
-        this.state = {
-            user:'',
-            pwd:'',
-            repeatpwd:'',
-            type:'genius'
-        }
         this.handelRegister = this.handelRegister.bind(this);
     }
-    handelChange(key,val){
-        this.setState({
-            [key]:val
-        });
+    componentDidMount(){
+        this.props.handelChange('type','genius');
     }
     handelRegister(){
         this.props.register(this.state);
@@ -38,20 +30,20 @@ class Register extends React.Component{
                     <List>
                         {this.props.msg?<NoticeBar mode="closable" action={<span style={{ color: '#a1a1a1' }}>不再提示</span>}>{this.props.msg}</NoticeBar>:null}
                         <InputItem 
-                        onChange={v=>this.handelChange('user',v)}>用户名</InputItem>
+                        onChange={v=>this.props.handelChange('user',v)}>用户名</InputItem>
                         <WhiteSpace></WhiteSpace>
                         <InputItem type="password"
-                        onChange={v=>this.handelChange('pwd',v)}>密码</InputItem>
+                        onChange={v=>this.props.handelChange('pwd',v)}>密码</InputItem>
                         <WhiteSpace></WhiteSpace>
                         <InputItem type="password"
-                        onChange={v=>this.handelChange('repeatpwd',v)}>确认密码</InputItem>
+                        onChange={v=>this.props.handelChange('repeatpwd',v)}>确认密码</InputItem>
                         <WhiteSpace></WhiteSpace>
                         <RadioItem 
-                        checked={this.state.type=='genius'}
-                        onChange={v=>this.handelChange('type','genius')}
+                        checked={this.props.state.type=='genius'}
+                        onChange={v=>this.props.handelChange('type','genius')}
                         >牛人</RadioItem>
-                        <RadioItem checked={this.state.type=='boss'}
-                        onChange={v=>this.handelChange('type','boss')}
+                        <RadioItem checked={this.props.state.type=='boss'}
+                        onChange={v=>this.props.handelChange('type','boss')}
                         >Boss</RadioItem>
                     </List>
                     <WhiteSpace></WhiteSpace>
@@ -62,7 +54,7 @@ class Register extends React.Component{
     }
 }
 
-export default connect(
+export default imoocForm(connect(
     state=>state.user,
     {register}
-)(Register);
+)(Register));

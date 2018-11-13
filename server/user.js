@@ -8,6 +8,7 @@ const utils = require('utility');
 const Router = express.Router();
 const model = require('./model');
 const User = model.getModel('user');
+const Chat = model.getModel('chat');
 
 //公共的过滤器,让查询的时候过滤掉密码
 const _filter = {'pwd':0,'__v':0};
@@ -20,6 +21,34 @@ Router.get('/list',(req,res)=>{
     User.find({type},(err,doc)=>{
         return res.json({code:0,data:doc});
     })
+});
+Router.get('/getmsglist',(req,res)=>{
+    const user = req.cookies.userid;
+    // Chat.remove({},(err,doc)=>{});
+    // 我们需要在前台获取用户的头像
+    // 最简单的方法查找用户列表中的信息
+    User.find({},(err,userdoc)=>{
+        let users = {};
+        //将数据遍历,将我们所需要的数据拿出来
+        userdoc.forEach(v=>{
+            users[v._id] = {name:v.user,avatar:v.avatar}
+        });
+        Chat.find({"$or":[{from:user},{to:user}]},(err,doc)=>{
+            if(!err){
+                return res.json({code:0,msgs:doc,users:users});
+            }
+        });
+        });
+    
+    // });
+    // //我们先将用户从cookie中获取出来
+    // 
+    // // '$or':[{from:user,to:user}]
+    // Chat.find({},(err,doc)=>{
+    //     if(!err){
+    //         return res.json({code:0,msgs:doc});
+    //     }
+    // });
 });
 //处理boss提交的招聘职位的信息
 Router.post('/update',(req,res)=>{

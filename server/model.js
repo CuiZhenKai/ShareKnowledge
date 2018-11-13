@@ -26,6 +26,19 @@ const models = {
     },
     //聊天表
     chat:{
+        'chatid':{type:String,require:true},
+        //从谁那里发出来
+        //下面这行代码的具体意思是:
+        //传递的from字段type必须是字符串
+        //require:true的意思是此字段是必传的
+        'from':{type:String,require:true},
+        //发给谁
+        'to':{type:String,require:true},
+        'read':{type:Boolean,default:false},
+        //内容
+        'content':{type:String,require:true,default:''},
+        //创建时间,主要是进行排序用
+        'create_time':{type:Number,default:new Date().getTime()}
     }
 }
 

@@ -21,6 +21,7 @@ import BossInfo from './container/bossinfo/bossinfo.js'
 import GeniusInfo from './container/geniusinfo/geniusinfo.js'
 import Dashboard from './component/dashboard/dashboard.js'
 import reducers from './reducers.js'
+import Chat from './component/chat/chat'
 import './config'
 import './index.css'
 
@@ -45,6 +46,7 @@ ReactDom.render(
                         <Route path='/bossinfo' component={BossInfo}></Route>
                         <Route path='/login' component={Login}></Route>
                         <Route path='/register' component={Register}></Route>
+                        <Route path='/chat/:user' component={Chat}></Route>
                         {/* 如果用户选择完头像之后,会跳转到boss或者genius详情的页面,但是我们并没有为这两个页面设置路由,所以如果没有跳转的路由被选中之后,就会跳转到dashboard组件,有时候dashboard组件也会用来做404页面*/}
                         <Route component={Dashboard}></Route>
                     </Switch>
